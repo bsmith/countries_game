@@ -17,7 +17,7 @@ const StyledNav = styled.nav`
 `;
 
 export default function NavBar (props) {
-    const listItems = props.children.map(child => <li>{child}</li>);
+    const listItems = props.children.map((child, index) => <li key={index}>{child}</li>);
     return <StyledNav>
         <ul>
             { listItems }
