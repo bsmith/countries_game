@@ -1,4 +1,11 @@
-import { Await, useRouteLoaderData } from "react-router-dom"
+import { Await, useRouteLoaderData, useAsyncValue } from "react-router-dom"
+
+import CountriesBox from "../containers/CountriesBox";
+
+const ShowCountriesBox = () => {
+    const countries = useAsyncValue();
+    return <CountriesBox countries={countries} />
+}
 
 export default function CountriesPage () {
     const data = useRouteLoaderData('root');
@@ -8,7 +15,7 @@ export default function CountriesPage () {
     return <>
         <p>Countries page</p>
         <Await resolve={data.countries} errorElement={error}>
-            { countries => <p><code>{JSON.stringify(countries)}</code></p> }
+            <ShowCountriesBox />
         </Await>
 
     </>
