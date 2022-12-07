@@ -21,8 +21,8 @@ export default function Header () {
         <NavBar>
             <NavItem to="/">Home</NavItem>
             <NavItem to="/countries">All Countries</NavItem>
-            <NavItem to="/game">Start Game</NavItem>
-            <NavItem to="/404">404</NavItem>
+            <NavItem to="/game">The Game</NavItem>
+            {/* <NavItem to="/404">404</NavItem> */}
         </NavBar>
     </StyledHeader>
 }

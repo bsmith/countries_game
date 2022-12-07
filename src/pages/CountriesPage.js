@@ -13,7 +13,6 @@ export default function CountriesPage () {
     const error = <p>Error from CountriesPage</p>
 
     return <>
-        <p>Countries page</p>
         <Await resolve={data.countries} errorElement={error}>
             <ShowCountriesBox />
         </Await>

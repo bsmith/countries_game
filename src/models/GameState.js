@@ -41,12 +41,18 @@ export default class GameState {
         return this.questions.length;
     }
 
+    maxScore() {
+        return this.numberOfQuestions * 5;
+    }
+
     peekCurrentQuestion() {
-        return this.questions.length ? this.questions[0] : null;
+        return this.questions.length && this.started ? this.questions[0] : null;
     }
 
     /* 1 for firstCountry, 2 for secondCountry */
     answerQuestion(answer) {
+        if (!this.started && !this.questions.length)
+            return;
         const question = this.questions.shift();
         const correctAnswer = question.firstCountry.population > question.secondCountry.population ? 1 : 2;
         if (answer === correctAnswer) {

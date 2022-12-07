@@ -56,6 +56,7 @@ const Root = () => {
                 <Outlet />
             {/* </Await> */}
         </React.Suspense>
+        <button onClick={e=>document.querySelector('html').classList.toggle('enable-cheat')}/>
     </>
 }
 
