@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     createBrowserRouter, createRoutesFromElements, RouterProvider,
     Route, Outlet, Await, defer, useLoaderData
@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import CountriesPage from './pages/CountriesPage';
 import GamePage from './pages/GamePage';
 import './App.css';
+
+import GameState from './models/GameState';
 
 const ErrorPage = () => "Error 404";
 
@@ -22,7 +24,12 @@ const getCountries = async () => {
     console.log("Starting getCountries");
     await delay(5000);
     console.log("Finishing getCountries");
-    return [ { name: "UK", population: 1234, flag: "flag.svg" } ];
+    return [
+        { name: "UK", population: 1234, flag: "flag.svg" },
+        { name: "France", population: 1500, flag: "flag.svg" },
+        { name: "Germany", population: 1600, flag: "flag.svg" },
+        { name: "Belgium", population: 789, flag: "flag.svg" }
+    ];
 };
 
 const loader = (...args) => {
@@ -48,12 +55,15 @@ const Root = () => {
 }
 
 const App = () => {
+    const gameStateRef = useRef(new GameState(5));
+    const gameProps = { gameStateRef };
+
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" id="root" loader={loader} element={<Root />}>
                 <Route index element={<HomePage />} />
                 <Route path="countries" element={<CountriesPage />} />
-                <Route path="game" element={<GamePage />} />
+                <Route path="game" element={<GamePage {...gameProps} />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>
         )
