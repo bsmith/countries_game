@@ -20,13 +20,16 @@ const Country = ({num, country}) => {
 export default function GamePage ({gameStateRef}) {
     const data = useRouteLoaderData('root');
     const [viewState, setViewState] = useState(viewStateFromModel(gameStateRef.current));
-    const syncViewState = () => setViewState(viewStateFromModel(gameStateRef.current));
     const [currentQuestion, setCurrentQuestion] = useState(null);
     const [message, setMessage] = useState(null);
 
+    const syncViewState = () => {
+        setViewState(viewStateFromModel(gameStateRef.current));
+        setCurrentQuestion(gameStateRef.current.peekCurrentQuestion());
+    };
+    
     const handleStart = (e) => {
         gameStateRef.current.started = true;
-        setCurrentQuestion(gameStateRef.current.peekCurrentQuestion());
         setMessage(null);
         syncViewState();
     };

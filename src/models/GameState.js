@@ -42,7 +42,7 @@ export default class GameState {
     }
 
     peekCurrentQuestion() {
-        return this.questions[0];
+        return this.questions.length ? this.questions[0] : null;
     }
 
     /* 1 for firstCountry, 2 for secondCountry */

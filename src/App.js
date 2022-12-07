@@ -11,6 +11,7 @@ import GamePage from './pages/GamePage';
 import './App.css';
 
 import GameState from './models/GameState';
+import * as CountriesApi from './apis/CountriesApi';
 
 const ErrorPage = () => "Error 404";
 
@@ -21,15 +22,19 @@ const delay = (millis) => {
 }
 
 const getCountries = async () => {
+    // await delay(5000);
+    // return [
+    //     { name: "UK", population: 1234, flag: "flag.svg" },
+    //     { name: "France", population: 1500, flag: "flag.svg" },
+    //     { name: "Germany", population: 1600, flag: "flag.svg" },
+    //     { name: "Belgium", population: 789, flag: "flag.svg" }
+    // ];
     console.log("Starting getCountries");
-    await delay(5000);
+    const countriesPromise = CountriesApi.getCountries();
+    const delayPromise = delay(2000);
+    await Promise.all([countriesPromise, delayPromise]);
     console.log("Finishing getCountries");
-    return [
-        { name: "UK", population: 1234, flag: "flag.svg" },
-        { name: "France", population: 1500, flag: "flag.svg" },
-        { name: "Germany", population: 1600, flag: "flag.svg" },
-        { name: "Belgium", population: 789, flag: "flag.svg" }
-    ];
+    return countriesPromise;
 };
 
 const loader = (...args) => {
